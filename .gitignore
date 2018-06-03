@@ -1,0 +1,5 @@
+.DS_Store
+.idea/
+CL/
+cmake-build-debug/
+omp

@@ -34,6 +34,7 @@ const float			TOL = 0.0001f;
 
 void			Wait( cl_command_queue );
 int				LookAtTheBits( float );
+void writeCSVHeaders(FILE *fp);
 
 
 int
@@ -226,6 +227,21 @@ main( int argc, char *argv[ ] )
 //	fprintf( stderr, "%8d\t%4d\t%10d\t%10.3lf GigaMultsPerSecond\n",
 //		NUM_ELEMENTS, LOCAL_SIZE, NUM_WORK_GROUPS, (double)NUM_ELEMENTS/(time1-time0)/1000000000. );
     printf("%d,%d,%10.3lf\n", NUM_ELEMENTS, LOCAL_SIZE, double(NUM_ELEMENTS/(time1 - time0)/1000000));
+    double elapsedTime = time1 - time0;
+    double performance = (double)NUM_ELEMENTS * NUM_ELEMENTS / elapsedTime / 1000000;
+
+    FILE *fpData = fopen("opencl_data.csv", "w");
+    writeCSVHeaders(fpData);
+    fprintf(fpData, "%lf\n", performance);
+
+    // Record the sums for graphing
+    fprintf(fpData, "Index,Sum\n");
+    for(int i = 0; i < NUM_ELEMENTS; i++) {
+        fprintf(fpData, "%d,%lf\n", i, hSums[i]);
+    }
+
+    fclose(fpData);
+
 
     // TODO: write results to file.
 
@@ -271,5 +287,10 @@ LookAtTheBits( float fp )
 {
     int *ip = (int *)&fp;
     return *ip;
+}
+
+void writeCSVHeaders(FILE *fp) {
+    char *header = "Performance(MegaMultiply-Sums per Second)";
+    fprintf(fp, header);
 }
 

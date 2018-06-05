@@ -1,0 +1,4 @@
+g++ project7_cl.cpp CL/libOpenCL.so -lm -fopenmp -o opencl
+
+
+

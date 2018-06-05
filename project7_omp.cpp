@@ -14,12 +14,12 @@
 void autocorrelate(float *arr, float *sums, int size, int numThreads, FILE *fpOut);
 void writeCSVHeaders(FILE *fp);
 
-int main() {
+int main(int argn, char **argv) {
 //#ifndef _OPENMP
 //    fprintf(stderr, "OpenMP is not supported. Exiting...\n");
 //    exit(1)
 //#endif
-   float Array[2*SIZE] ;
+    float Array[2*SIZE] ;
     float Sums[SIZE];
     int Size = SIZE;
     int i;

@@ -25,13 +25,13 @@ int main(int argn, char **argv) {
         exit(1);
     }
 
-    float array[2*SIZE];
+    float arr[2*SIZE];
     float sums[SIZE];
     int size = SIZE;
     int i;
 
     for(int i = 0; i < size; i++) {
-        fscanf(fp, "%d", &array[i]);
+        fscanf(fp, "%d", &arr[i]);
     }
 
     fclose(fp);
@@ -40,7 +40,7 @@ int main(int argn, char **argv) {
     double start = omp_get_wtime();
 
     for(int shift = 0; shift < size; shift++) {
-        sums[shift] = SimdMulSum(array, &array[shift], size);
+        sums[shift] = SimdMulSum(arr, &arr[shift], size);
     }
 
     double end = omp_get_wtime();
@@ -51,7 +51,7 @@ int main(int argn, char **argv) {
     // Record the results.
     FILE *fpData = fopen("simd_data.csv", "w");
     fprintf(fpData, "Performance(MegaMultiply-Sums per Second)");
-    fprintf(fpData, "lf", performance);
+    fprintf(fpData, "%lf", performance);
 
     fprintf(fpData, "Index,Sum\n");
     for(int i = 0; i < size; i++) {

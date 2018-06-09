@@ -5,6 +5,7 @@
 **************************************************/
 
 #include <omp.h>
+#include <stdio.h>
 
 #include "simd.p5.h"
 
@@ -25,13 +26,14 @@ int main(int argn, char **argv) {
         exit(1);
     }
 
-    float arr[2*SIZE];
-    float sums[SIZE];
     int size = SIZE;
+    float arr[2*size];
+    float sums[size];
     int i;
 
     for(int i = 0; i < size; i++) {
-        fscanf(fp, "%d", &arr[i]);
+        fscanf(fp, "%f", &arr[i]);
+        arr[i+size] = arr[i];  // Duplicate.
     }
 
     fclose(fp);

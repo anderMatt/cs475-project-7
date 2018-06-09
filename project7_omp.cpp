@@ -1,7 +1,7 @@
 /**************************************************
  * Matthew Anderson
  * CS 475 - Project 7B
- * 6/3/2018
+ * 6/8/2018
 **************************************************/
 
 #include <stdio.h>
@@ -15,10 +15,10 @@ void autocorrelate(float *arr, float *sums, int size, int numThreads, FILE *fpOu
 void writeCSVHeaders(FILE *fp);
 
 int main(int argn, char **argv) {
-//#ifndef _OPENMP
-//    fprintf(stderr, "OpenMP is not supported. Exiting...\n");
-//    exit(1)
-//#endif
+#ifndef _OPENMP
+    fprintf(stderr, "OpenMP is not supported. Exiting...\n");
+    exit(1)
+#endif
     float Array[2*SIZE] ;
     float Sums[SIZE];
     int Size = SIZE;
